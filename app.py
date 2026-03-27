@@ -17,7 +17,7 @@ hours = st.number_input("Enter study hours")
 if st.button("Predict"):
 
     response = requests.post(
-        "http://127.0.0.1:8000/predict",
+        "https://fastapi-app-5gt0.onrender.com/predict",
         json={"hours": hours}
     )
 
