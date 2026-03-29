@@ -3,7 +3,6 @@ import requests
 
 st.title("🎓 Student Marks Predictor")
 
-# Input from user
 hours = st.number_input("Enter study hours")
 
 if st.button("Predict"):
@@ -13,12 +12,15 @@ if st.button("Predict"):
     try:
         response = requests.post(url, json={"hours": hours})
 
-        # Show status for debugging
         st.write("Status Code:", response.status_code)
 
         if response.status_code == 200:
             result = response.json()
             st.success(f"Predicted Marks: {result['marks']}")
+
+        elif response.status_code == 429:
+            st.warning("Too many requests 🚫 Please wait a few seconds and try again.")
+
         else:
             st.error("API Error")
             st.write(response.text)
